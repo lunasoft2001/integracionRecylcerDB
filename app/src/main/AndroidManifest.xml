@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".actividades.ListaClientes">
         </activity>
+        <activity android:name=".actividades.FormularioClientes">
+        </activity>
     </application>
 
 </manifest>

@@ -41,13 +41,6 @@ public class DataSourceListaClientes {
 
         Cursor cursor = db.query(DBHelper.Tablas.CLIENTES, todasColumnaslistaClientes, null, null, null, null, null);
 
-        List<Clientes> listaClientes = CursorALista(cursor);
-        return listaClientes;
-
-    }
-
-    @NonNull
-    private List<Clientes> CursorALista(Cursor cursor) {
         List<Clientes> listaClientes = new ArrayList<Clientes>();
         while (cursor.moveToNext()){
             Clientes clientes = new Clientes();
@@ -55,11 +48,10 @@ public class DataSourceListaClientes {
             clientes.setNombre(cursor.getString(cursor.getColumnIndex(DBHelper.ColClientes.NOMBRE)));
             clientes.setDireccion(cursor.getString(cursor.getColumnIndex(DBHelper.ColClientes.DIRECCION)));
             clientes.setTelefono(cursor.getString(cursor.getColumnIndex(DBHelper.ColClientes.TELEFONO)));
-
             listaClientes.add(clientes);
         }
+
         return listaClientes;
+
     }
-
-
 }
