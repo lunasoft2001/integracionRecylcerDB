@@ -1,12 +1,17 @@
 package at.ums.integracionrecylcerdb.actividades;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 
 import java.util.List;
 
+import at.ums.integracionrecylcerdb.adaptadores.RecyclerItemClickListener;
 import at.ums.integracionrecylcerdb.database.DataSourceListaClientes;
 import at.ums.integracionrecylcerdb.database.Datos;
 import at.ums.integracionrecylcerdb.R;
@@ -65,6 +70,29 @@ public class ListaClientes extends AppCompatActivity {
         //adapter = new ListaClientesAdapter(items);//para la clase Datos
         adapter = new ListaClientesAdapter(mClientes); //para el SQLite
         recycler.setAdapter(adapter);
+
+        //Este metodo esta implementando la clase RecyclerItemClickListener que he creado
+        recycler.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                        Clientes clienteElegido = mClientes.get(position);
+
+                        Intent intento = new Intent(ListaClientes.this, FormularioClientes.class);
+                        intento.putExtra("idCliente",String.valueOf(clienteElegido.getIdCliente()));
+                        intento.putExtra("nombre",clienteElegido.getNombre());
+                        intento.putExtra("direccion",clienteElegido.getDireccion());
+                        intento.putExtra("telefono",clienteElegido.getTelefono());
+
+                        startActivity(intento);
+
+                    }
+                })
+        );
+
+
+
 
 
 

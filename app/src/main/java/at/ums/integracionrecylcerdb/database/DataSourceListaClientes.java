@@ -41,7 +41,7 @@ public class DataSourceListaClientes {
 
         Cursor cursor = db.query(DBHelper.Tablas.CLIENTES, todasColumnaslistaClientes, null, null, null, null, null);
 
-        List<Clientes> listaClientes = new ArrayList<Clientes>();
+        List<Clientes> listaClientes = new ArrayList<>();
         while (cursor.moveToNext()){
             Clientes clientes = new Clientes();
             clientes.setIdCliente(cursor.getInt(cursor.getColumnIndex(DBHelper.ColClientes.ID)));

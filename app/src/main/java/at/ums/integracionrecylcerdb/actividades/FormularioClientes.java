@@ -1,12 +1,14 @@
 package at.ums.integracionrecylcerdb.actividades;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import at.ums.integracionrecylcerdb.R;
 import at.ums.integracionrecylcerdb.database.DBHelper;
@@ -34,6 +36,20 @@ public class FormularioClientes extends AppCompatActivity {
         nombre = (EditText) findViewById(R.id.etNombre);
         direccion = (EditText) findViewById(R.id.etDireccion);
         telefono = (EditText) findViewById(R.id.etTelefono);
+
+        //Rellenamos los campos
+        Intent intento = getIntent();
+
+        Bundle bundle = intento.getExtras();
+        if(bundle != null){
+            idCliente.setText(bundle.getString("idCliente"));
+            nombre.setText(bundle.getString("nombre"));
+            direccion.setText(bundle.getString("direccion"));
+            telefono.setText(bundle.getString("telefono"));
+
+        }
+
+
 
 
         //Abrimos la BD en modo escritura
@@ -67,6 +83,7 @@ public class FormularioClientes extends AppCompatActivity {
 
     //Este método iría aquí o mejor en DataSource??
     public void Eliminar() {
+
         int id = Integer.parseInt(idCliente.getText().toString());
         db.delete(DBHelper.Tablas.CLIENTES,DBHelper.ColClientes.ID + "=" + id, null);
 
